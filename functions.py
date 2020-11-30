@@ -4,8 +4,9 @@ Funciones para calcular los diferentes parámetros del diseno VoIP
 
 @authors: Jose Carlos, Sergio, Manuel, Alejandro
 """
+import numpy as np
 
-def retardo_total(Rt,Rr,J,VPS,CSI,Ralg):
+def retardo_total(Rr,J,VPS,CSI,Ralg):
     #Retardo conjunto, CODEC + paquetizacion
     Rorg = VPS + 0.1*CSI
     
@@ -28,6 +29,12 @@ def retardo_total(Rt,Rr,J,VPS,CSI,Ralg):
     return Rorg, Ralg, Rr, Rjitter_1, Rjitter_2, Rdest, Rt1, Rt2, Npaq1, Npaq2
 
 
+def comparaRt(Rtmax,Rt1,Rt2):
+    salida = np.zeros(2)
     
+    if (Rt1 <= Rtmax):
+        salida[0] = 1
+    if (Rt2 <= Rtmax):
+        salida[1] = 1
     
-    
+    return salida
