@@ -5,6 +5,7 @@ Funciones para calcular los diferentes parámetros del diseno VoIP
 @authors: Jose Carlos, Sergio, Manuel, Alejandro
 """
 import numpy as np
+import erlang 
 
 def retardo_total(Rr,J,VPS,CSI,Ralg):
     #Retardo conjunto, CODEC + paquetizacion
