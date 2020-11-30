@@ -439,7 +439,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="page">
      <widget class="QLabel" name="label_5">
@@ -933,12 +933,15 @@
        </rect>
       </property>
       <layout class="QGridLayout" name="gridLayout">
-       <item row="1" column="0">
-        <widget class="QLabel" name="label_6">
+       <item row="3" column="0">
+        <widget class="QLabel" name="label_8">
          <property name="text">
-          <string>Número de líneas por cliente (Nl)</string>
+          <string>Probabilidad llamada (Pll)</string>
          </property>
         </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QSpinBox" name="spinBox_Nl"/>
        </item>
        <item row="2" column="0">
         <widget class="QLabel" name="label_7">
@@ -947,8 +950,15 @@
          </property>
         </widget>
        </item>
-       <item row="2" column="1">
-        <widget class="QDoubleSpinBox" name="SpinBox_Tpll"/>
+       <item row="3" column="1">
+        <widget class="QDoubleSpinBox" name="spinBox_Pll">
+         <property name="maximum">
+          <double>100.000000000000000</double>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QSpinBox" name="spinBox_Nc"/>
        </item>
        <item row="0" column="0">
         <widget class="QLabel" name="label_4">
@@ -957,23 +967,27 @@
          </property>
         </widget>
        </item>
-       <item row="0" column="1">
-        <widget class="QSpinBox" name="spinBox_Nc"/>
+       <item row="2" column="1">
+        <widget class="QDoubleSpinBox" name="SpinBox_Tpll"/>
        </item>
-       <item row="3" column="1">
-        <widget class="QDoubleSpinBox" name="spinBox_Pll">
-         <property name="maximum">
-          <double>1.000000000000000</double>
+       <item row="1" column="0">
+        <widget class="QLabel" name="label_6">
+         <property name="text">
+          <string>Número de líneas por cliente (Nl)</string>
          </property>
         </widget>
        </item>
-       <item row="1" column="1">
-        <widget class="QSpinBox" name="spinBox_Nl"/>
-       </item>
-       <item row="3" column="0">
-        <widget class="QLabel" name="label_8">
+       <item row="2" column="2">
+        <widget class="QLabel" name="label_21">
          <property name="text">
-          <string>Probabilidad llamada (Pll)</string>
+          <string>minutos</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="2">
+        <widget class="QLabel" name="label_23">
+         <property name="text">
+          <string>%</string>
          </property>
         </widget>
        </item>
@@ -984,7 +998,7 @@
        <rect>
         <x>550</x>
         <y>160</y>
-        <width>341</width>
+        <width>342</width>
         <height>171</height>
        </rect>
       </property>
@@ -1035,6 +1049,27 @@
        </item>
        <item row="3" column="1">
         <widget class="QDoubleSpinBox" name="spinBox_jitter"/>
+       </item>
+       <item row="1" column="2">
+        <widget class="QLabel" name="label_3">
+         <property name="text">
+          <string>ms</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="2">
+        <widget class="QLabel" name="label_17">
+         <property name="text">
+          <string>ms</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="2">
+        <widget class="QLabel" name="label_19">
+         <property name="text">
+          <string>ms</string>
+         </property>
+        </widget>
        </item>
       </layout>
      </widget>
@@ -1234,6 +1269,9 @@
          <property name="text">
           <string>-</string>
          </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
         </widget>
        </item>
        <item row="1" column="0">
@@ -1246,7 +1284,7 @@
        <item row="4" column="0">
         <widget class="QLabel" name="label_22">
          <property name="text">
-          <string>El retardo del Buffer antijitter</string>
+          <string>Retardo del Buffer antijitter</string>
          </property>
         </widget>
        </item>
@@ -1255,12 +1293,15 @@
          <property name="text">
           <string>-</string>
          </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
         </widget>
        </item>
        <item row="5" column="0">
         <widget class="QLabel" name="label_24">
          <property name="text">
-          <string>retardo decodificación en el destino </string>
+          <string>Retardo decodificación en el destino </string>
          </property>
         </widget>
        </item>
@@ -1282,6 +1323,9 @@
          <property name="text">
           <string>-</string>
          </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
         </widget>
        </item>
        <item row="0" column="2">
@@ -1294,6 +1338,9 @@
          </property>
          <property name="text">
           <string>Buffer antijitter x2</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
          </property>
         </widget>
        </item>
@@ -1308,12 +1355,15 @@
          <property name="text">
           <string>Buffer antijitter x1.5</string>
          </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
         </widget>
        </item>
        <item row="3" column="0">
         <widget class="QLabel" name="label_20">
          <property name="text">
-          <string>El retardo de red </string>
+          <string>Retardo de red </string>
          </property>
         </widget>
        </item>
@@ -1321,6 +1371,9 @@
         <widget class="QLabel" name="label_RetardoAntijitter1">
          <property name="text">
           <string>-</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
          </property>
         </widget>
        </item>
@@ -1350,12 +1403,18 @@
          <property name="text">
           <string>-</string>
          </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
         </widget>
        </item>
        <item row="5" column="1">
         <widget class="QLabel" name="label_RetardoDecodificacion1">
          <property name="text">
           <string>-</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
          </property>
         </widget>
        </item>
@@ -1364,12 +1423,18 @@
          <property name="text">
           <string>-</string>
          </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
         </widget>
        </item>
        <item row="7" column="1">
         <widget class="QLabel" name="label_NpaquetesRTP1">
          <property name="text">
           <string>-</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
          </property>
         </widget>
        </item>
@@ -1378,12 +1443,18 @@
          <property name="text">
           <string>-</string>
          </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
         </widget>
        </item>
        <item row="3" column="2">
         <widget class="QLabel" name="label_RetardoRed2">
          <property name="text">
           <string>-</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
          </property>
         </widget>
        </item>
@@ -1392,12 +1463,18 @@
          <property name="text">
           <string>-</string>
          </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
         </widget>
        </item>
        <item row="5" column="2">
         <widget class="QLabel" name="label_RetardoDecodificacion1_2">
          <property name="text">
           <string>-</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
          </property>
         </widget>
        </item>
@@ -1406,12 +1483,18 @@
          <property name="text">
           <string>-</string>
          </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
         </widget>
        </item>
        <item row="7" column="2">
         <widget class="QLabel" name="label_NpaquetesRTP2">
          <property name="text">
           <string>-</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
          </property>
         </widget>
        </item>
@@ -1768,7 +1851,7 @@
        <item row="1" column="2">
         <widget class="QLabel" name="label_BWll_cRTP">
          <property name="text">
-          <string>TextLabel</string>
+          <string>-</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
@@ -1822,7 +1905,7 @@
        <item row="2" column="2">
         <widget class="QLabel" name="label_BWSIPTRUNK_cRTP">
          <property name="text">
-          <string>TextLabel</string>
+          <string>-</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
@@ -1876,7 +1959,7 @@
        <item row="1" column="1">
         <widget class="QLabel" name="label_BWll_RTP">
          <property name="text">
-          <string>TextLabel</string>
+          <string>-</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
@@ -1886,7 +1969,7 @@
        <item row="2" column="1">
         <widget class="QLabel" name="label_BWSIPTRUNK_RTP">
          <property name="text">
-          <string>TextLabel</string>
+          <string>-</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
