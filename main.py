@@ -7,25 +7,26 @@ Created on Sat Dec  5 12:54:39 2020
 
 from main_ui import *
 
-class MainWindows(QtWidgets.QMainWindow, Ui_MainWindow,):
-	def __init__(self, *args, **kwargs):
-		QtWidgets.QMainWindow.__init__(self, *args, **kwargs)
-		self.setupUi(self)
-
-# 		self.lPruebas.setText("Aquí con mis cosas")
-# 		self.pbCalcular.setText("Hacer cosas")
-# 		self.pbCalcular.clicked.connect(self.actualizarBoton)
-
-# 	def actualizarBoton(self):
-# 		self.lPruebas.setText("Pos sa acabó")
-# 		self.tabWidget.setEnabled(1)
-
+class MainWindows(QtWidgets.QMainWindow, Ui_MainWindow):
+    def __init__(self, *args, **kwargs):
+        QtWidgets.QMainWindow.__init__(self, *args, **kwargs)
+        self.setupUi(self)
+        self.showPage1()
+        
+    def showPage1(self):
+        self.stackedWidget.setCurrentWidget(self.page)
+        self.button_continuar1.clicked.connect(self.showPage2)
+        
+    def showPage2(self):
+        self.stackedWidget.setCurrentWidget(self.page_2)
+        self.button_continuar2.clicked.connect(self.showPage3)
 		
-	pass
-
+    def showPage3(self):
+        self.stackedWidget.setCurrentWidget(self.page_3)
+        self.button_cambiarParametros.clicked.connect(self.showPage1)
 
 if __name__ == "__main__":
-	app = QtWidgets.QApplication([]) #Pasar los parámetros
+	app = QtWidgets.QApplication([])
 	windows = MainWindows()
 	windows.show()
 	app.exec_()
