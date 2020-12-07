@@ -7,6 +7,20 @@ Funciones para calcular los diferentes parámetros del diseno VoIP
 import numpy as np
 import erlang 
 
+def elige_codec(mos, codecs):
+    dist = codecs[:,2] - mos
+    
+    for i in range(0,len(dist),1):
+        if (dist[i]>=1):
+            dist[i]=0
+    
+    #Devuelve la posicion del codec con MOS maximo para el entero introducido,
+    #p. ejemplo: introducimos 4, devuelve 7, pues el codec en esta posicion
+    #tiene MOS 4.13
+    codec = np.argmax(dist)
+    
+    return codec
+    
 def retardo_total(Rr,J,VPS,CSI,Ralg):
     #Retardo conjunto, CODEC + paquetizacion
     Rorg = VPS + 0.1*CSI
