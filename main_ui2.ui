@@ -439,7 +439,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>2</number>
     </property>
     <widget class="QWidget" name="page">
      <widget class="QLabel" name="label_5">
@@ -2122,7 +2122,58 @@
       </property>
       <layout class="QGridLayout" name="gridLayout_6">
        <item row="0" column="1">
-        <widget class="QComboBox" name="comboBox_CODEC"/>
+        <widget class="QComboBox" name="comboBox_CODEC">
+         <item>
+          <property name="text">
+           <string>G.711 (64 Kbps)</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>G.729 (8 Kbps)</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>G.723.1 (6.3 Kbps)</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>G.723.1 (5.3 Kbps)</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>G.726 (32 Kbps)</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>G.726 (24 Kbps)</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>G.728 (16 Kbps)</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>G.722_64k (64 Kbps)</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>ilbc_mode_20 (15.2 Kbps)</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>ilbc_mode_30 (13.33 Kbps)</string>
+          </property>
+         </item>
+        </widget>
        </item>
        <item row="0" column="0">
         <widget class="QLabel" name="label_55">
