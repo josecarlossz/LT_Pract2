@@ -13,9 +13,12 @@ codecs = np.loadtxt(open("codecs.csv", "rb"), delimiter=";")
 Ralg = np.loadtxt(open("ralg.csv", "rb"), delimiter=";")
 Rt = 0
 bht = 0
+BWres = 0
 retardos = []
+codec_param = []
 BWll = []
 BWst = []
+salidaBWST = []
 activar = 0
 cambiar_codec = 0
 idx_codec = 0
@@ -62,9 +65,12 @@ class MainWindows(QtWidgets.QMainWindow, Ui_MainWindow):
           
         #Cambiar parametros de entrada
         self.button_cambiarParametros.clicked.connect(self.showPage1)
+        
+        #Generacion informe
+        self.button_informe.clicked.connect(self.crear_txt)
             
     def actualiza_valor(self):
-        global retardos, calculado, Rt, bht, BWll, BWst, BWres, idx_codec, cambiar_codec
+        global retardos, calculado, Rt, bht, BWll, BWst, BWres, idx_codec, cambiar_codec, codec_param
         
         mos = self.spinBox_MOS.value()
         Nc = self.spinBox_Nc.value()
@@ -167,12 +173,13 @@ class MainWindows(QtWidgets.QMainWindow, Ui_MainWindow):
         self.label_BWll_cRTP.setText(str(BWll[1]) + ' Kbps')
 
     def muestra_bwst(self):
-        global BWst, BWres
+        global BWst, BWres, salidaBWST
         
         self.label_BWSIPTRUNK_RTP.setText(str(BWst[0]) + ' Mbps')
         self.label_BWSIPTRUNK_cRTP.setText(str(BWst[1]) + ' Mbps')
         
         salida = func.comparaBW(BWres,BWst[0],BWst[1])
+        salidaBWST = salida
         
         if (salida[0]):
             self.label_BWSIPTRUNK_RTP.setStyleSheet("background-color: lightgreen")
@@ -190,7 +197,6 @@ class MainWindows(QtWidgets.QMainWindow, Ui_MainWindow):
             self.label_BWSIPTRUNK_RTP.setStyleSheet("background-color: red")
             self.label_BWSIPTRUNK_cRTP.setStyleSheet("background-color: red")
             
-            activar = 1
             self.gridLayoutWidget_6.setEnabled(1)
             
     def combo_codec(self):
@@ -201,6 +207,47 @@ class MainWindows(QtWidgets.QMainWindow, Ui_MainWindow):
         idx_codec = self.comboBox_CODEC.currentIndex()
         self.label_CODEC.setText(str(self.comboBox_CODEC.currentText()))
         self.showPage1()
+        
+    def crear_txt(self):
+        global retardos, codec_param, Rt, BWres, salidaBWST
+        
+        informe = open("informe_generado.txt", "w")
+        
+        ######################
+        # COMPLETAR MANU
+        ######################
+        
+        informe.write("Teniendo en cuenta que el retardo total no debe superar " + str(Rt) + 
+                      " ms, la opcion elegida debe ser aquella que da como resultado " + 
+                      self.label_RetardoTotalFinal.text() + ", pues queda dentro del limite establecido.\n\n")
+        
+        ######################
+        # COMPLETAR MANU
+        ######################
+        
+        informe.write("Por otra parte, como el ancho de banda disponible (en reserva) es de " +
+                      str(BWres) + " Mbps, ")
+        
+        if (salidaBWST[0]):
+            informe.write("el protocolo a usar con este codec debe ser RTP, ya que en este caso el" + 
+                          "ancho de banda de SIP TRUNK es de " + self.label_BWSIPTRUNK_RTP.text())
+        
+        elif (salidaBWST[1]):
+            informe.write("el protocolo a usar con este codec debe ser cRTP, ya que en este caso el " + 
+                          "ancho de banda de SIP TRUNK es de " + self.label_BWSIPTRUNK_cRTP.text())
+            
+        elif (salidaBWST[0]==1 and salidaBWST[1]==1):
+            informe.write("el protocolo a usar con este codec puede ser RTP o cRTP, ya que en este caso" + 
+                          "ambos protocolos cumplen con el maximo ancho de banda establecido y es de " + 
+                          self.label_BWSIPTRUNK_RTP.text() + " y " + self.label_BWSIPTRUNK_cRTP.text() + 
+                          ", respectivamente. Preferiblemente debe escogerse cRTP para una mayor compresion.")
+            
+        elif (salidaBWST[0]==0 and salidaBWST[1]==0):
+            informe.write("y el ancho de banda de SIP TRUNK calculado para RTP y cRTP es de " + 
+                          self.label_BWSIPTRUNK_RTP.text() + " y " + self.label_BWSIPTRUNK_cRTP.text() + 
+                          " respectivamente, no es posible implementar este codec con los parametros de" +
+                          " entrada introducidos, por lo que sera necesario elegir otro codec o cambiar los parametros de entrada.")
+        informe.close()
         
 
 if __name__ == "__main__":
