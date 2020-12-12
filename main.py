@@ -22,28 +22,28 @@ salidaBWST = []
 activar = 0
 cambiar_codec = 0
 idx_codec = 0
-mos = 0
-Nc = 0
-Nl = 0
-Pll = 0
-Tpll = 0
-Rr = 0
-J = 0
-Rorg = 0
-Ralg = []
-Rr = 0
-Rjitter_1 = 0
-Rdest = 0
-Rt1 = 0
-Rt2 = 0
-Rjitter_2 = 0
-Npaq1 = 0
-Npaq2 = 0
-BHT = 0 
-BWll_RTP = 0
-BWll_cRTP = 0
-BWll_RTP = 0
-BWST_cRTP = 0
+# mos = 0
+# Nc = 0
+# Nl = 0
+# Pll = 0
+# Tpll = 0
+# Rr = 0
+# J = 0
+# Rorg = 0
+# Ralg = []
+# Rr = 0
+# Rjitter_1 = 0
+# Rdest = 0
+# Rt1 = 0
+# Rt2 = 0
+# Rjitter_2 = 0
+# Npaq1 = 0
+# Npaq2 = 0
+# BHT = 0 
+# BWll_RTP = 0
+# BWll_cRTP = 0
+# BWll_RTP = 0
+# BWST_cRTP = 0
 
 class MainWindows(QtWidgets.QMainWindow, Ui_MainWindow):
     def __init__(self, *args, **kwargs):
@@ -93,6 +93,7 @@ class MainWindows(QtWidgets.QMainWindow, Ui_MainWindow):
             
     def actualiza_valor(self):
         global retardos, calculado, Rt, bht, BWll, BWst, BWres, idx_codec, cambiar_codec, codec_param
+        global mos, Nc, Nl, Pll, Tpll, Rr, J
         
         mos = self.spinBox_MOS.value()
         Nc = self.spinBox_Nc.value()
@@ -231,52 +232,53 @@ class MainWindows(QtWidgets.QMainWindow, Ui_MainWindow):
         self.showPage1()
         
     def crear_txt(self):
-        global retardos, codec_param, Rt, BWres, salidaBWST, mos, Nc, Nl, Pll, Tpll, Rr, J, Rorg, Ralg, Rr, Rjitter_1, Rdest, Rt1, Rt2, Rjitter_2, Npaq1, Npaq2, BHT, BWll_RTP, BWll_cRTP, BWll_RTP, BWST_cRTP
+        global retardos, codec_param, Rt, BWres, salidaBWST, mos, Nc, Nl, Pll, Tpll, Rr, J, bht, BWll, BWst
         
         informe = open("informe_generado.txt", "w")
         
-informe.write("Se ha realizado el desarrollo de un software para el diseño de redes para VOIP") 
-informe.write("Este proceso ha sido estudiado para dos buffer antijitter: [x1.5], [x2]")
-informe.write("Los parámetros de entrada que se han introducido son:")
-informe.write("Mos:" + str(mos))
-informe.write("Número de empresas:" + str(Nc))
-informe.write("Número de lineas por cliente:" + str (Nl))
-informe.write("Probabilidad de llamada:"+ str(Pll) "%")
-informe.write("Tiempo medio de llamada:"+ str(Tpll) "minutos")
-Informe.write("Ancho de banda de reserva:" +str(BWres) "Mbps")
-informe.wirte("Retardo total:"+ str(Rt) "ms")
-informe.write("Retardo de red:"+ str(Rr) "ms")
-informe.write("Jitter total:" + str(J) "ms")
-informe.write("")
-informe.write("Para el buffer antijitter [x1.5] se han obtenido los siguientes resultados:")
-informe.write("Un retardo conjunto, donde se tiene en cuenta el retardo codec+paquetizacion de:" +str(Rorg) "ms" )
-informe.write("Retardo algoritmico (look ahead):" + str(Ralg)"ms")
-informe.write("Retardo de red:" +str(Rr)"ms")
-informe.write("Retardo del buffer antijitter, en este caso (1.5 x J)=" +str(Rjitter_1) "ms)
-informe.write("Retardo de codificacion en el destino, (0.1 x VPS)="+ str(Rdest)"ms")
-informe.write("Con los cuales obtenemos un Retardo total, mediante la suma de todos ellos, (Rconj + Ralg + Rr + Rjitter + Rdest)=" + str(Rt1)"ms y un numero de paquetes RTP almacenados en el buffer (Rjitter1//VSP)=" + str(Npaq1) "paquetes")
-informe.write("")
-informe.write("Para el buffer antijitter [x2] se han obtenido los siguientes resultados:")
-informe.write("Un retardo conjunto, donde se tiene en cuenta el retardo codec+paquetizacion de:" +str(Rorg)"ms")
-informe.write("Retardo algoritmico (look ahead):" + str(Ralg)"ms")
-informe.write("Retardo de red:" +str(Rr)"ms")
-informe.write("Retardo del buffer antijitter, en este caso (2 x J)=" +str(Rjitter_2)""ms")
-informe.write("Retardo de codificacion en el destino, (0.1 x VPS)="+ str(Rdest)"ms")
-informe.write("Con los cuales obtenemos un Retardo total, mediante la suma de todos ellos, (Rconj + Ralg + Rr + Rjitter + Rdest)=" + str(Rt2) "ms y un numero de paquetes RTP almacenados en el buffer (Rjitter2//VSP)=" + str(Npaq2)"paquetes")
+        informe.write("Se ha realizado el desarrollo de un software para el diseño de redes para VOIP.") 
+        informe.write("Este proceso ha sido estudiado para dos buffer antijitter: [x1.5], [x2].\n\n")
+        informe.write("Los parámetros de entrada que se han introducido son:\n")
+        informe.write("Mos:" + str(mos) + "\n")
+        informe.write("Número de empresas:" + str(Nc)+ "\n")
+        informe.write("Número de lineas por cliente:" + str (Nl)+ "\n") 
+        informe.write("Probabilidad de llamada:"+ str(Pll) + "%\n")
+        informe.write("Tiempo medio de llamada:"+ str(Tpll)+ " minutos\n")
+        informe.write("Ancho de banda de reserva:" +str(BWres)+ " Mbps\n" )
+        informe.write("Retardo total:"+ str(Rt) + " ms\n")
+        informe.write("Retardo de red:"+ str(Rr) + " ms\n")
+        informe.write("Jitter total:" + str(J) + " ms\n")
+        informe.write("\n")
+        informe.write("Para el buffer antijitter [x1.5] se han obtenido los siguientes resultados:\n")
+        informe.write("Un retardo conjunto, donde se tiene en cuenta el retardo codec+paquetizacion de:" + str(retardos[0]) + " ms\n")
+        informe.write("Retardo algoritmico (look ahead):" + str(retardos[1])+ " ms\n")
+        informe.write("Retardo de red:" +str(Rr)+" ms\n")
+        informe.write("Retardo del buffer antijitter, en este caso (1.5 x J)=" +str(retardos[3])+ " ms\n")
+        informe.write("Retardo de codificacion en el destino, (0.1 x VPS)="+ str(retardos[5])+ " ms\n")
+        informe.write("Con los cuales obtenemos un Retardo total, mediante la suma de todos ellos, (Rconj + Ralg + Rr + Rjitter + Rdest)=" 
+                      + str(retardos[6]) + " ms y un numero de paquetes RTP almacenados en el buffer =" + str(retardos[8]) + " paquetes\n")
+        informe.write("\n\n")
+        informe.write("Para el buffer antijitter [x2] se han obtenido los siguientes resultados:\n")
+        informe.write("Un retardo conjunto, donde se tiene en cuenta el retardo codec+paquetizacion de:" +str(retardos[0]) + " ms\n")
+        informe.write("Retardo algoritmico (look ahead):" + str(retardos[1]) + " ms\n")
+        informe.write("Retardo de red:" +str(Rr)+" ms\n")
+        informe.write("Retardo del buffer antijitter, en este caso (2 x J)=" +str(retardos[4])+" ms\n")
+        informe.write("Retardo de codificacion en el destino, (0.1 x VPS)="+ str(retardos[5]) + " ms\n")
+        informe.write("Con los cuales obtenemos un Retardo total, mediante la suma de todos ellos, (Rconj + Ralg + Rr + Rjitter + Rdest)=" 
+                      + str(retardos[7]) + " ms y un numero de paquetes RTP almacenados en el buffer =" + str(retardos[9]) +" paquetes\n\n")
 
         informe.write("Teniendo en cuenta que el retardo total no debe superar " + str(Rt) + 
                       " ms, la opcion elegida debe ser aquella que da como resultado " + 
-                      self.label_RetardoTotalFinal.text() + ", pues queda dentro del limite establecido.\n\n")
+                      self.label_RetardoTotalFinal.text() + " ms, pues queda dentro del limite establecido.\n\n")
         
-informe.write("A continuación, se calculará el trafico de hora cargada:")
-informe.write("BHT=(Numero de empresas x Numero de lineas por cliente x Tiempo medio de llamada)/60 =" +str(BHT) "Erlangs")
-informe.write("Por último, tanto para el protocolo RTP como cRTP, se calculará el ancho de banda de una llamada y de SIPTRUNK"
-informe.write("Para conocer el ancho de banda de una llamada, debemos calcular la longitud de cabecera y la longitud del paquete en bits para cada protocolo, finalmente:")
-informe.write("Ancho de banda de una llamda(RTP)=> (Longitud total del paquete RTP x PPS)/1000 ="+str(BWll_RTP) "kbps")
-informe.write("Ancho de banda de una llamda(cRTP)=> (Longitud total del paquete cRTP x PPS)/1000 ="+str(BWll_cRTP) "kbps")
-informe.write("")
-informe.write("Ancho de banda SIPTRUNK(RTP)=> Nllamadas x Ancho de banda de una llamada(RTP)/1000 =" +str(BWST_RTP) "Mbps")
-informe.write("ncho de banda SIPTRUNK(cRTP)=> Nllamadas x Ancho de banda de una llamada(cRTP)/1000 =" +str(BWST_cRTP) "Mbps")
+        informe.write("A continuación, se calculará el trafico de hora cargada:\n\n")
+        informe.write("BHT=(Numero de empresas x Numero de lineas por cliente x Tiempo medio de llamada)/60 =" +str(bht) + " Erlangs\n\n")
+        informe.write("Por último, tanto para el protocolo RTP como cRTP, se calculará el ancho de banda de una llamada y de SIPTRUNK. ")
+        informe.write("Para conocer el ancho de banda de una llamada, debemos calcular la longitud de cabecera y la longitud del paquete en bits para cada protocolo, finalmente: \n\n")
+        informe.write("Ancho de banda de una llamada(RTP)=> (Longitud total del paquete RTP x PPS)/1000 ="+ str(BWll[0]) + " kbps\n")
+        informe.write("Ancho de banda de una llamada(cRTP)=> (Longitud total del paquete cRTP x PPS)/1000 ="+ str(BWll[1]) + " kbps\n")
+        informe.write("Ancho de banda SIPTRUNK(RTP)=> Nllamadas x Ancho de banda de una llamada(RTP)/1000 =" + str(BWst[0]) + " Mbps\n")
+        informe.write("ncho de banda SIPTRUNK(cRTP)=> Nllamadas x Ancho de banda de una llamada(cRTP)/1000 =" + str(BWst[1]) + " Mbps\n\n")
 
         
         informe.write("Por otra parte, como el ancho de banda disponible (en reserva) es de " +
