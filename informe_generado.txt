@@ -1,3 +1,44 @@
-Teniendo en cuenta que el retardo total no debe superar 0.0 ms, la opcion elegida debe ser aquella que da como resultado NO CUMPLE, pues queda dentro del limite establecido.
+Se ha realizado el desarrollo de un software para el diseño de redes para VOIP.Este proceso ha sido estudiado para dos buffer antijitter: [x1.5], [x2].
 
-Por otra parte, como el ancho de banda disponible (en reserva) es de 0.04 Mbps, y el ancho de banda de SIP TRUNK calculado para RTP y cRTP es de 0.09040000000000001 Mbps y 0.076 Mbps respectivamente, no es posible implementar este codec con los parametros de entrada introducidos, por lo que sera necesarios elegir otro codec o cambiar los parametros de entrada.
+Los parámetros de entrada que se han introducido son:
+Mos:2
+Número de empresas:0
+Número de lineas por cliente:0
+Probabilidad de llamada:0.0%
+Tiempo medio de llamada:0.0 minutos
+Ancho de banda de reserva:0.0 Mbps
+Retardo total:0.0 ms
+Retardo de red:0.0 ms
+Jitter total:0.0 ms
+
+Para el buffer antijitter [x1.5] se han obtenido los siguientes resultados:
+Un retardo conjunto, donde se tiene en cuenta el retardo codec+paquetizacion de:21.0 ms
+Retardo algoritmico (look ahead):0.0 ms
+Retardo de red:0.0 ms
+Retardo del buffer antijitter, en este caso (1.5 x J)=0.0 ms
+Retardo de codificacion en el destino, (0.1 x VPS)=2.0 ms
+Con los cuales obtenemos un Retardo total, mediante la suma de todos ellos, (Rconj + Ralg + Rr + Rjitter + Rdest)=23.0 ms y un numero de paquetes RTP almacenados en el buffer =0.0 paquetes
+
+
+Para el buffer antijitter [x2] se han obtenido los siguientes resultados:
+Un retardo conjunto, donde se tiene en cuenta el retardo codec+paquetizacion de:21.0 ms
+Retardo algoritmico (look ahead):0.0 ms
+Retardo de red:0.0 ms
+Retardo del buffer antijitter, en este caso (2 x J)=0.0 ms
+Retardo de codificacion en el destino, (0.1 x VPS)=2.0 ms
+Con los cuales obtenemos un Retardo total, mediante la suma de todos ellos, (Rconj + Ralg + Rr + Rjitter + Rdest)=23.0 ms y un numero de paquetes RTP almacenados en el buffer =0.0 paquetes
+
+Teniendo en cuenta que el retardo total no debe superar 0.0 ms, la opcion elegida debe ser aquella que da como resultado NO CUMPLE ms, pues queda dentro del limite establecido.
+
+A continuación, se calculará el trafico de hora cargada:
+
+BHT=(Numero de empresas x Numero de lineas por cliente x Tiempo medio de llamada)/60 =0.0 Erlangs
+
+Por último, tanto para el protocolo RTP como cRTP, se calculará el ancho de banda de una llamada y de SIPTRUNK. Para conocer el ancho de banda de una llamada, debemos calcular la longitud de cabecera y la longitud del paquete en bits para cada protocolo, finalmente: 
+
+Ancho de banda de una llamada(RTP)=> (Longitud total del paquete RTP x PPS)/1000 =90.4 kbps
+Ancho de banda de una llamada(cRTP)=> (Longitud total del paquete cRTP x PPS)/1000 =76.0 kbps
+Ancho de banda SIPTRUNK(RTP)=> Nllamadas x Ancho de banda de una llamada(RTP)/1000 =0.09040000000000001 Mbps
+ncho de banda SIPTRUNK(cRTP)=> Nllamadas x Ancho de banda de una llamada(cRTP)/1000 =0.076 Mbps
+
+Por otra parte, como el ancho de banda disponible (en reserva) es de 0.0 Mbps, y el ancho de banda de SIP TRUNK calculado para RTP y cRTP es de 0.09040000000000001 Mbps y 0.076 Mbps respectivamente, no es posible implementar este codec con los parametros de entrada introducidos, por lo que sera necesario elegir otro codec o cambiar los parametros de entrada.
