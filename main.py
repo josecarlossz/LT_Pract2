@@ -201,7 +201,9 @@ class MainWindows(QtWidgets.QMainWindow, Ui_MainWindow):
         self.spinBox_MOS.setEnabled(0)
         idx_codec = self.comboBox_CODEC.currentIndex()
         self.label_CODEC.setText(str(self.comboBox_CODEC.currentText()))
+        self.actualiza_valor()
         self.showPage1()
+
         
     def crear_txt(self):
         global retardos, codec_param, Rt, BWres, salidaBWST, mos, Nc, Nl, Pll, Tpll, Rr, J, bht, BWll, BWst
