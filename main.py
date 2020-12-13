@@ -19,40 +19,14 @@ codec_param = []
 BWll = []
 BWst = []
 salidaBWST = []
-activar = 0
 cambiar_codec = 0
 idx_codec = 0
-# mos = 0
-# Nc = 0
-# Nl = 0
-# Pll = 0
-# Tpll = 0
-# Rr = 0
-# J = 0
-# Rorg = 0
-# Ralg = []
-# Rr = 0
-# Rjitter_1 = 0
-# Rdest = 0
-# Rt1 = 0
-# Rt2 = 0
-# Rjitter_2 = 0
-# Npaq1 = 0
-# Npaq2 = 0
-# BHT = 0 
-# BWll_RTP = 0
-# BWll_cRTP = 0
-# BWll_RTP = 0
-# BWST_cRTP = 0
 
 class MainWindows(QtWidgets.QMainWindow, Ui_MainWindow):
     def __init__(self, *args, **kwargs):
         QtWidgets.QMainWindow.__init__(self, *args, **kwargs)
         self.setupUi(self)
         self.showPage1()
-        
-        if (activar==0):
-            self.gridLayoutWidget_6.setEnabled(0)
         
     def showPage1(self):
         global cambiar_codec, idx_codec
@@ -147,7 +121,7 @@ class MainWindows(QtWidgets.QMainWindow, Ui_MainWindow):
         self.spinBox_jitter.valueChanged.connect(self.actualiza_valor)
         
     def muestra_Rt(self):
-        global retardos, Rt, activar
+        global retardos, Rt
         
         self.label_RetardoTotal1.setText(str(retardos[6]) + ' ms')
         self.label_RetardoTotal2.setText(str(retardos[7]) + ' ms')
@@ -220,8 +194,6 @@ class MainWindows(QtWidgets.QMainWindow, Ui_MainWindow):
             self.label_BWSIPTRUNK_RTP.setStyleSheet("background-color: red")
             self.label_BWSIPTRUNK_cRTP.setStyleSheet("background-color: red")
             
-            self.gridLayoutWidget_6.setEnabled(1)
-            
     def combo_codec(self):
         global idx_codec, cambiar_codec
         
@@ -233,6 +205,9 @@ class MainWindows(QtWidgets.QMainWindow, Ui_MainWindow):
         
     def crear_txt(self):
         global retardos, codec_param, Rt, BWres, salidaBWST, mos, Nc, Nl, Pll, Tpll, Rr, J, bht, BWll, BWst
+        
+        self.label_InformeGenerado.setText("Informe guardado con éxito en el directorio en el que"+
+                                           " se encuentra el programa")
         
         informe = open("informe_generado.txt", "w")
         
