@@ -1,0 +1,2 @@
+It is necessary to have this module installed in python:
+- Numpy
